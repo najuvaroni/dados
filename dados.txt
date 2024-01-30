@@ -1,0 +1,55 @@
+CREATE TABLE paciente (
+	id_paciente INT PRIMARY KEY,
+	Nome VARCHAR (50),
+	DataNascimento DATE,
+	Endereco VARCHAR(50),
+	Email VARCHAR(50)
+
+);
+
+CREATE TABLE medicos (
+	id_medico INT PRIMARY KEY,
+	Nome VARCHAR (50),
+	Especialidade VARCHAR (50),
+	CRM VARCHAR (50)
+);
+
+	CREATE TABLE agendamento (
+	id_agendamento INT PRIMARY KEY,
+	id_paciente INT,
+	id_medico INT,
+	data_hora DATETIME,
+	foreign KEY (id_paciente) references paciente(id_paciente),
+	foreign KEY (id_medico) references medicos(id_medico)
+
+);
+
+	CREATE TABLE prescricoes (
+	id_prescricao INT PRIMARY KEY,
+	id_paciente INT,
+	id_medico INT,
+	data_prescricao DATE,
+	medicamentos TEXT,
+	foreign KEY (id_paciente) references paciente(id_paciente),
+	foreign KEY (id_medico) references medicos(id_medico)
+
+);
+
+	CREATE TABLE historicos_medicos (
+	id_historico INT PRIMARY KEY,
+	id_paciente INT,
+	id_medico INT,
+	data_atendimento DATETIME,
+	diagnostico text,
+	tratamento text,
+	foreign KEY (id_paciente) references paciente(id_paciente),
+	foreign KEY (id_medico) references medicos(id_medico)
+
+);
+
+
+ALTER TABLE paciente ADD COLUMN telefone VARCHAR (50);
+ALTER TABLE paciente ADD COLUMN sexo VARCHAR (50);
+
+ALTER TABLE medicos ADD COLUMN telefone VARCHAR (50);
+ALTER TABLE historicos_medicos ADD COLUMN exames_realizados TEXT;
